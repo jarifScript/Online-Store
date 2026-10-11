@@ -25,9 +25,6 @@ app.include_router(account.router)
 app.include_router(admin.router)
 app.include_router(chat.router)
 
-app.frontend("/", directory="frontend/dist", fallback="index.html")
-
-
 @app.get("/health")
 def health():
     return {"status": "ok"}

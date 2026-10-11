@@ -3,9 +3,8 @@
 ## Deploy frontend and API together on Vercel
 
 Create a Vercel project connected to this repository and keep the **Root Directory**
-set to the repository root. The Vercel entrypoint and build command are configured in
-`pyproject.toml`; the build installs the frontend dependencies and creates
-`frontend/dist`, which FastAPI serves alongside the API.
+set to the repository root. `vercel.json` configures two services: the Vite frontend
+serves all normal app routes, while FastAPI receives `/api/*` and `/health`.
 
 Add these environment variables in the Vercel project settings for each environment
 you deploy:
@@ -22,10 +21,9 @@ you deploy:
 
 `EXTRA_ORIGINS` and `SHIPPING_COUNTRIES` are optional backend settings. Since the
 frontend and API share one origin, leave `VITE_API_URL` unset in Vercel; the
-frontend will call `/api/...` on the deployed domain. For local development,
-`frontend/.env` may set `VITE_API_URL=http://localhost:8000`, and Vite proxies
-`/api` to the backend when that variable is unset.
+frontend will call `/api/...` on the deployed domain. For local development, Vite
+proxies `/api` to `http://localhost:8000` when `VITE_API_URL` is unset.
 
 After deployment, configure Stripe to send its webhook to
-`https://your-store.vercel.app/api/webhook`. Deployments require the Supabase and
-Stripe environment variables above to be present before the backend can start.
+`https://your-store.vercel.app/api/webhook`. Deployments require the Supabase and Stripe environment variables above to be
+present before the backend can start.

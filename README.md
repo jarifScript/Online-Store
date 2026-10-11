@@ -21,8 +21,9 @@ you deploy:
 
 `EXTRA_ORIGINS` and `SHIPPING_COUNTRIES` are optional backend settings. Since the
 frontend and API share one origin, leave `VITE_API_URL` unset in Vercel; the
-frontend will call `/api/...` on the deployed domain. For local development, Vite
-proxies `/api` to `http://localhost:8000` when `VITE_API_URL` is unset.
+frontend will call `/api/...` on the deployed domain. Production builds always use
+the same-origin API. For local development, `VITE_API_URL` may point directly to
+the backend; otherwise Vite proxies `/api` to `http://localhost:8000`.
 
 After deployment, configure Stripe to send its webhook to
 `https://your-store.vercel.app/api/webhook`. Deployments require the Supabase and Stripe environment variables above to be

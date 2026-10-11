@@ -1,0 +1,9 @@
+.env
+.vercel/
+.venv/
+venv/
+node_modules/
+__pycache__/
+dist/
+passwords.txt
+Screenshot *.png
